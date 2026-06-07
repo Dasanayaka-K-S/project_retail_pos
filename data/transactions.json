@@ -1,0 +1,54 @@
+[
+  {
+    "id": "txn_20260608043952",
+    "timestamp": "2026-06-08T04:39:52.941262",
+    "cart": [
+      {
+        "category": "Shoes",
+        "description": "Retro gets modernized in the Nike Waffle Debut. Remember that smooth nylon and suede combination...",
+        "id": "prod_001",
+        "imageUrl": "https://app.kicksonfire.com/kofapp/upload/events_master_images/nike-waffle-debut-light-stone-rattan.png",
+        "name": "Nike Waffle Debut",
+        "price": 80,
+        "stock": 218,
+        "quantity": 3
+      }
+    ],
+    "subtotal": 240,
+    "tax": 28.799999999999997,
+    "discount": 24,
+    "total": 244.8,
+    "paymentMethod": "Credit Card"
+  },
+  {
+    "id": "txn_20260608044224",
+    "timestamp": "2026-06-08T04:42:24.313617",
+    "cart": [
+      {
+        "category": "Shoes",
+        "description": "Retro gets modernized in the Nike Waffle Debut. Remember that smooth nylon and suede combination...",
+        "id": "prod_001",
+        "imageUrl": "https://app.kicksonfire.com/kofapp/upload/events_master_images/nike-waffle-debut-light-stone-rattan.png",
+        "name": "Nike Waffle Debut",
+        "price": 80,
+        "stock": 218,
+        "quantity": 1
+      },
+      {
+        "category": "Clothing",
+        "description": "Crafted with stretchy, breathable material, the Nike Tech Woven Jacket offers a supportive fit and feel.",
+        "id": "prod_002",
+        "imageUrl": "https://cms.brnstc.de/product_images/1122x1536_retina/cpne/media/images/product/26/4/100322831116000_0_1776902400000.jpg",
+        "name": "Nike Tech",
+        "price": 130.83,
+        "stock": 196,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 210.83,
+    "tax": 25.2996,
+    "discount": 21.083000000000002,
+    "total": 215.0466,
+    "paymentMethod": "Credit Card"
+  }
+]
