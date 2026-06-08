@@ -1,70 +1,167 @@
-# Getting Started with Create React App
+# 🛒 Retail POS — Point of Sale System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack Point of Sale web application built for the Vector Vibe Internship Assignment.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🧰 Tech Stack
 
-### `npm start`
+| Layer | Technology |
+|-------|------------|
+| Frontend | React.js + Raw CSS |
+| Backend | Python + Flask |
+| Database | JSON File |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📁 Project Structure
 
-### `npm test`
+```
+project_retail_pos/
+├── frontend/
+│   ├── public/
+│   │   └── index.html
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── components_css/
+│   │   │   │   ├── AddProductModal.css
+│   │   │   │   ├── CartPanel.css
+│   │   │   │   ├── ProductCard.css
+│   │   │   │   └── Sidebar.css
+│   │   │   ├── AddProductModal.jsx
+│   │   │   ├── CartPanel.jsx
+│   │   │   ├── ProductCard.jsx
+│   │   │   └── Sidebar.jsx
+│   │   ├── hooks/
+│   │   │   └── useCart.js
+│   │   ├── pages/
+│   │   │   ├── Dashboard.jsx
+│   │   │   └── Dashboard.css
+│   │   ├── services/
+│   │   │   └── api.js
+│   │   ├── App.js
+│   │   ├── App.css
+│   │   └── index.js
+│   └── package.json
+├── backend/
+│   ├── app.py
+│   ├── requirements.txt
+│   └── routes/
+│       ├── products.py
+│       └── transactions.py
+├── data/
+│   └── products.json
+└── README.md
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🚀 Local Setup & Running
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
+- Node.js v18+ — https://nodejs.org
+- Python 3.8+ — https://python.org
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 1️⃣ Backend (Flask)
 
-### `npm run eject`
+Open a terminal and run:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+cd project_retail_pos/backend
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+pip install -r requirements.txt
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+python app.py
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+✅ Flask will run at: **http://localhost:5000**
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 2️⃣ Frontend (React)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Open a **new terminal** and run:
 
-### Code Splitting
+```bash
+cd project_retail_pos/frontend
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm install
+```
 
-### Analyzing the Bundle Size
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+✅ React will run at: **http://localhost:3000**
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+> ⚠️ **Important:** Both terminals must be running at the same time!
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🔌 API Endpoints
 
-### Deployment
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/products` | Get all products |
+| POST | `/api/products` | Add a new product |
+| POST | `/api/transactions` | Submit a transaction |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### POST /api/products — Request Body
+```json
+{
+  "name": "Nike Air Max",
+  "description": "Classic comfort shoe",
+  "category": "Shoes",
+  "price": 120.00,
+  "stock": 50,
+  "imageUrl": "https://..."
+}
+```
 
-### `npm run build` fails to minify
+### POST /api/transactions — Request Body
+```json
+{
+  "cart": [
+    {
+      "id": "prod_001",
+      "name": "Nike Waffle Debut",
+      "price": 80.00,
+      "quantity": 2
+    }
+  ],
+  "subtotal": 160.00,
+  "tax": 19.20,
+  "discount": 16.00,
+  "total": 163.20,
+  "paymentMethod": "Credit Card"
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## ✨ Features
+
+- 📦 Browse products in a 3-column grid
+- 🔍 Search and filter products by category
+- 🛒 Add items to cart with one click
+- ➕➖ Adjust quantity with + / - buttons
+- 🗑️ Remove items from cart
+- 💰 Real-time financial summary (Sub-Total, Tax 12%, Discount 10%, Total)
+- ➕ Add new products via modal form
+- ✅ Submit completed transactions to backend
+
+---
+
+## 👨‍💻 Developed By
+
+Internship Practical Assignment — Vector Vibe
