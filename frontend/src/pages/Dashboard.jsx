@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchProducts } from "../services/api";
 import { useCart } from "../hooks/useCart";
+import Header from "../components/Header";
 import ProductCard from "../components/ProductCard";
 import CartPanel from "../components/CartPanel";
 import AddProductModal from "../components/AddProductModal";
@@ -10,7 +11,7 @@ const CATEGORIES = ["All Product", "Shoes", "Clothing", "Others Product"];
 
 /**
  * Dashboard page — the main "Create Transaction" screen.
- * Matches the layout in dashboard.png:
+ *   - Header with title, icons, avatars, profile
  *   - Category filter tabs + search
  *   - 3-column product grid
  *   - Right-hand cart / transaction panel
@@ -71,82 +72,85 @@ function Dashboard() {
   });
 
   return (
-    <div className="dashboard">
-      <div className="dashboard__main">
-        {/* Header */}
-        <div className="dashboard__header">
-          <h1 className="dashboard__page-title">Create Transaction</h1>
-          <div className="dashboard__header-actions">
-            <button
-              className="add-product-btn"
-              onClick={() => setShowModal(true)}
-            >
-              + Add Product
-            </button>
-          </div>
-        </div>
+    <div className="dashboard-wrapper">
 
-        {/* Category tabs + Search */}
-        <div className="dashboard__filters">
-          <div className="category-tabs">
-            {CATEGORIES.map((cat) => (
+      {/* Header — full width top bar */}
+      <Header pageTitle="Create Transaction" />
+
+      <div className="dashboard">
+        <div className="dashboard__main">
+
+          {/* Top bar — filters + add button */}
+          <div className="dashboard__filters">
+            <div className="category-tabs">
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat}
+                  className={`category-tab ${activeCategory === cat ? "category-tab--active" : ""}`}
+                  onClick={() => setActiveCategory(cat)}
+                >
+                  {cat}
+                  <span className="category-tab__count">
+                    {getCategoryCount(cat)}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            <div className="dashboard__filter-right">
+              <div className="search-wrap">
+                <span className="search-icon">🔍</span>
+                <input
+                  type="text"
+                  className="search-input"
+                  placeholder="Search products..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+
               <button
-                key={cat}
-                className={`category-tab ${activeCategory === cat ? "category-tab--active" : ""}`}
-                onClick={() => setActiveCategory(cat)}
+                className="add-product-btn"
+                onClick={() => setShowModal(true)}
               >
-                {cat}
-                <span className="category-tab__count">
-                  {getCategoryCount(cat)}
-                </span>
+                + Add Product
               </button>
-            ))}
+            </div>
           </div>
 
-          <div className="search-wrap">
-            <span className="search-icon">🔍</span>
-            <input
-              type="text"
-              className="search-input"
-              placeholder="Search products..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
+          {/* Product grid */}
+          {loading && <p className="status-msg">Loading products...</p>}
+          {error && <p className="status-msg status-msg--error">{error}</p>}
+
+          {!loading && !error && (
+            <div className="product-grid">
+              {filteredProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onAddToCart={addToCart}
+                />
+              ))}
+              {filteredProducts.length === 0 && (
+                <p className="status-msg">No products found.</p>
+              )}
+            </div>
+          )}
         </div>
 
-        {/* Product grid */}
-        {loading && <p className="status-msg">Loading products...</p>}
-        {error && <p className="status-msg status-msg--error">{error}</p>}
-
-        {!loading && !error && (
-          <div className="product-grid">
-            {filteredProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                onAddToCart={addToCart}
-              />
-            ))}
-            {filteredProducts.length === 0 && (
-              <p className="status-msg">No products found.</p>
-            )}
-          </div>
-        )}
+        {/* Right cart panel */}
+        <CartPanel
+          cartItems={cartItems}
+          onIncrease={increaseQty}
+          onDecrease={decreaseQty}
+          onRemove={removeFromCart}
+          onReset={resetCart}
+          subtotal={subtotal}
+          tax={tax}
+          discount={discount}
+          total={total}
+        />
       </div>
-
-      {/* Right cart panel */}
-      <CartPanel
-        cartItems={cartItems}
-        onIncrease={increaseQty}
-        onDecrease={decreaseQty}
-        onRemove={removeFromCart}
-        onReset={resetCart}
-        subtotal={subtotal}
-        tax={tax}
-        discount={discount}
-        total={total}
-      />
 
       {/* Add product modal */}
       <AddProductModal

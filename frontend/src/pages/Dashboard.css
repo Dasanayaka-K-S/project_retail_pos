@@ -1,10 +1,16 @@
+.dashboard-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
 .dashboard {
   display: flex;
   gap: 1.5rem;
   padding: 1.5rem;
-  height: 100vh;
+  flex: 1;
   overflow: hidden;
-  box-sizing: border-box;
 }
 
 .dashboard__main {
@@ -15,17 +21,18 @@
   overflow: hidden;
 }
 
-.dashboard__header {
+.dashboard__filters {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-.dashboard__page-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin: 0;
+.dashboard__filter-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .add-product-btn {
@@ -38,18 +45,11 @@
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.15s;
+  white-space: nowrap;
 }
 
 .add-product-btn:hover {
   background-color: #333;
-}
-
-.dashboard__filters {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
 }
 
 .category-tabs {
@@ -90,10 +90,6 @@
   font-weight: 700;
   padding: 1px 6px;
   border-radius: 20px;
-}
-
-.category-tab--active .category-tab__count {
-  background-color: #b5f23d;
 }
 
 .search-wrap {
