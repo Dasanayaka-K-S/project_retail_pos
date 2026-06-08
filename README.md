@@ -69,7 +69,7 @@ project_retail_pos/
 Open a terminal and run:
 
 ```bash
-cd project_retail_pos/backend
+cd project_retail_pos_1/backend
 ```
 
 ```bash
@@ -89,7 +89,7 @@ python app.py
 Open a **new terminal** and run:
 
 ```bash
-cd project_retail_pos/frontend
+cd project_retail_pos_1/frontend
 ```
 
 ```bash
