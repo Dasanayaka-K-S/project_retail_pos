@@ -10,14 +10,24 @@ body {
   color: #1a1a1a;
 }
 
+/* Full screen layout */
 .app-layout {
   display: flex;
-  min-height: 100vh;
-  background-color: #f0f0ee;
+  height: 100vh;
+  overflow: hidden;
 }
 
+/* Right side — header on top, content below */
+.app-right {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Page content area */
 .app-content {
   flex: 1;
-  background-color: #f0f0ee;
   overflow: hidden;
+  background-color: #f0f0ee;
 }

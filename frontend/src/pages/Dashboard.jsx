@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchProducts } from "../services/api";
 import { useCart } from "../hooks/useCart";
-import Header from "../components/Header";
 import ProductCard from "../components/ProductCard";
 import CartPanel from "../components/CartPanel";
 import AddProductModal from "../components/AddProductModal";
@@ -11,10 +10,7 @@ const CATEGORIES = ["All Product", "Shoes", "Clothing", "Others Product"];
 
 /**
  * Dashboard page — the main "Create Transaction" screen.
- *   - Header with title, icons, avatars, profile
- *   - Category filter tabs + search
- *   - 3-column product grid
- *   - Right-hand cart / transaction panel
+ * Header is now in App.js — not here.
  */
 function Dashboard() {
   const [products, setProducts] = useState([]);
@@ -55,13 +51,11 @@ function Dashboard() {
     setProducts((prev) => [...prev, newProduct]);
   }
 
-  // Count products per category for tab badges
   function getCategoryCount(category) {
     if (category === "All Product") return products.length;
     return products.filter((p) => p.category === category).length;
   }
 
-  // Filter products by active category and search query
   const filteredProducts = products.filter((product) => {
     const matchesCategory =
       activeCategory === "All Product" || product.category === activeCategory;
@@ -72,85 +66,78 @@ function Dashboard() {
   });
 
   return (
-    <div className="dashboard-wrapper">
+    <div className="dashboard">
+      <div className="dashboard__main">
 
-      {/* Header — full width top bar */}
-      <Header pageTitle="Create Transaction" />
-
-      <div className="dashboard">
-        <div className="dashboard__main">
-
-          {/* Top bar — filters + add button */}
-          <div className="dashboard__filters">
-            <div className="category-tabs">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat}
-                  className={`category-tab ${activeCategory === cat ? "category-tab--active" : ""}`}
-                  onClick={() => setActiveCategory(cat)}
-                >
-                  {cat}
-                  <span className="category-tab__count">
-                    {getCategoryCount(cat)}
-                  </span>
-                </button>
-              ))}
-            </div>
-
-            <div className="dashboard__filter-right">
-              <div className="search-wrap">
-                <span className="search-icon">🔍</span>
-                <input
-                  type="text"
-                  className="search-input"
-                  placeholder="Search products..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </div>
-
+        {/* Category tabs + Search + Add button */}
+        <div className="dashboard__filters">
+          <div className="category-tabs">
+            {CATEGORIES.map((cat) => (
               <button
-                className="add-product-btn"
-                onClick={() => setShowModal(true)}
+                key={cat}
+                className={`category-tab ${activeCategory === cat ? "category-tab--active" : ""}`}
+                onClick={() => setActiveCategory(cat)}
               >
-                + Add Product
+                {cat}
+                <span className="category-tab__count">
+                  {getCategoryCount(cat)}
+                </span>
               </button>
-            </div>
+            ))}
           </div>
 
-          {/* Product grid */}
-          {loading && <p className="status-msg">Loading products...</p>}
-          {error && <p className="status-msg status-msg--error">{error}</p>}
-
-          {!loading && !error && (
-            <div className="product-grid">
-              {filteredProducts.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  onAddToCart={addToCart}
-                />
-              ))}
-              {filteredProducts.length === 0 && (
-                <p className="status-msg">No products found.</p>
-              )}
+          <div className="dashboard__filter-right">
+            <div className="search-wrap">
+              <span className="search-icon">🔍</span>
+              <input
+                type="text"
+                className="search-input"
+                placeholder="Search products..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
             </div>
-          )}
+            <button
+              className="add-product-btn"
+              onClick={() => setShowModal(true)}
+            >
+              + Add Product
+            </button>
+          </div>
         </div>
 
-        {/* Right cart panel */}
-        <CartPanel
-          cartItems={cartItems}
-          onIncrease={increaseQty}
-          onDecrease={decreaseQty}
-          onRemove={removeFromCart}
-          onReset={resetCart}
-          subtotal={subtotal}
-          tax={tax}
-          discount={discount}
-          total={total}
-        />
+        {/* Product grid */}
+        {loading && <p className="status-msg">Loading products...</p>}
+        {error && <p className="status-msg status-msg--error">{error}</p>}
+
+        {!loading && !error && (
+          <div className="product-grid">
+            {filteredProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onAddToCart={addToCart}
+              />
+            ))}
+            {filteredProducts.length === 0 && (
+              <p className="status-msg">No products found.</p>
+            )}
+          </div>
+        )}
       </div>
+
+      {/* Right cart panel */}
+      <CartPanel
+        cartItems={cartItems}
+        onIncrease={increaseQty}
+        onDecrease={decreaseQty}
+        onRemove={removeFromCart}
+        onReset={resetCart}
+        subtotal={subtotal}
+        tax={tax}
+        discount={discount}
+        total={total}
+      />
 
       {/* Add product modal */}
       <AddProductModal
