@@ -4,7 +4,7 @@
     "name": "Nike Waffle Debut",
     "description": "Retro gets modernized in the Nike Waffle Debut. Remember that smooth nylon and suede combination...",
     "category": "Shoes",
-    "price": 80.00,
+    "price": 80.0,
     "stock": 218,
     "imageUrl": "https://app.kicksonfire.com/kofapp/upload/events_master_images/nike-waffle-debut-light-stone-rattan.png"
   },
@@ -22,7 +22,7 @@
     "name": "Nike V2K Run New",
     "description": "The Nike Elite Crew Basketball Socks offer a supportive fit and feel with targeted cushioning.",
     "category": "Others Product",
-    "price": 16.50,
+    "price": 16.5,
     "stock": 123,
     "imageUrl": "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto,u_9ddf04c7-2a9a-4d76-add1-d15af8f0263d,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/2de39bdc-8bb5-4906-8710-b49f3ba8d320/U+NK+ELITE+CREW+132.png"
   },
@@ -53,4 +53,5 @@
     "stock": 192,
     "imageUrl": "https://www.nike.qa/dw/image/v2/BDVB_PRD/on/demandware.static/-/Sites-akeneo-master-catalog/default/dw2b477cd9/nk/d99/f/b/1/1/2/d99fb112_8324_40d6_a7d6_fdf95fb424b2.jpg?sw=700&sh=700&sm=fit&q=100&strip=false"
   }
+  
 ]
