@@ -197,6 +197,9 @@ npm start
 
 ---
 
+figma link = https://www.figma.com/design/lrs7A8yohjLydQBvfn7Tzm/Retail-POS-System-UI-Design?node-id=0-1&t=UJoc9ZUAhGOpRNBG-1
+
+
 ## 👨‍💻 Developed By
 
 **K.S. Dasanayaka**
